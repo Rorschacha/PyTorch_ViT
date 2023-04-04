@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+from PIL import Image
 
 import torch
 import torch.nn as nn
@@ -71,7 +72,7 @@ test_transforms = transforms.Compose(
     ]
 )
 
-
+# Dataset
 class CatsDogsDataset(Dataset):
     def __init__(self, labels, transform=None):
         self.file_list = labels
@@ -83,10 +84,11 @@ class CatsDogsDataset(Dataset):
 
     def __getitem__(self, idx):
         img_path = self.file_list[idx][0]
-        img = mpimg.imread(img_path)
+        #img = mpimg.imread(img_path)
+        img = Image.open(img_path) #pillow 读取图片
         img_transformed = self.transform(img)
 
-        label = self.file_list[idx][0]
+        label = int(self.file_list[idx][1])
 
         return img_transformed, label
 

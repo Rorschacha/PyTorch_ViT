@@ -225,11 +225,13 @@ def build_a():
     ca = Create_Annotation()
     path_ds = r"D:\datasets\PracticeSets\cats and dogs\data"
     path_tr = r"D:\datasets\PracticeSets\cats and dogs\data\train"
+    path_va = r"D:\datasets\PracticeSets\cats and dogs\data\valid"
+
     path_te = r"D:\datasets\PracticeSets\cats and dogs\data\test"
 
     path_at = r"D:\datasets\PracticeSets\cats and dogs\data"
     ca.build_apc(data_folder=path_tr, anno_folder=path_at,anno_type="train")
-    #ca.build_apc(data_folder=path_te, anno_folder=path_at,anno_type="test")
+    ca.build_apc(data_folder=path_va, anno_folder=path_at,anno_type="valid")
 
 
 def main():
