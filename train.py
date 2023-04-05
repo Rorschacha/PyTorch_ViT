@@ -17,8 +17,8 @@ from tqdm import tqdm
 # settings
 device="cuda"
 batch_size = 8
-epochs = 10
-save_after_epochs=10
+epochs = 20
+save_after_epochs=20
 lr = 3e-5
 gamma = 0.7
 
@@ -59,6 +59,10 @@ valid_data = CatsDogsDataset(labels_va, transform=train_transforms)
 train_loader=DataLoader(dataset = train_data, batch_size=batch_size, shuffle=True)
 valid_loader=DataLoader(dataset = valid_data, batch_size=batch_size, shuffle=True)
 def train():
+    if True: # load path
+        path_model=r"pre_model_epoch_40.pth"
+        load_pretrained_model(load_model_path=path_model)
+
     for epoch in range(epochs):
         epoch_loss = 0
         epoch_accuracy = 0
@@ -92,6 +96,8 @@ def train():
 
             epoch_accuracy += acc / len(train_loader)
             epoch_loss += loss / len(train_loader)
+
+            #print("loss",loss)
         print("Epoch : {} - loss : {:.4f} - acc: {:.4f} ".format(epoch,epoch_loss,epoch_accuracy))
 
 
@@ -138,7 +144,10 @@ def get_gpu_memory_info():
         print("GPU is not available.")
 
 
-
+def load_pretrained_model(load_model_path=None):
+    if load_model_path:
+        model.load_state_dict(torch.load(load_model_path))
+        print(f"Loaded model parameters from {load_model_path}")
 
 
 def main():
