@@ -91,7 +91,7 @@ def train():
             #out (batch_size,classes)
             predicted_class_indices = output.argmax(dim=1)
             correct_predictions = predicted_class_indices == label
-            float_correct_predictions = correct_predictions.float() # True 1.0, False 0.0
+            float_correct_predictions = correct_predictions.float()  # True 1.0, False 0.0
             acc = float_correct_predictions.mean()
 
             epoch_accuracy += acc / len(train_loader)
